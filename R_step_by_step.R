@@ -31,6 +31,7 @@ panderOptions('table.split.table',Inf); panderOptions('table.split.cells',Inf);
 whatisthis <- function(xx){
   list(class=class(xx),info=c(mode=mode(xx),storage.mode=storage.mode(xx)
                               ,typeof=typeof(xx)))};
+
 # R basic syntax ----
 #'
 #' # R basic syntax
@@ -72,16 +73,29 @@ bar<-foo<-500;
 foo <- 2 + 2; foo;
 foo <-log(10); foo;
 whatisthis(bar)
+foo <- log(2^2); foo;
+foo <- log(((3^2)*(2+3)/4)-1); foo;
 #' Character strings. Create these by wrapping single (`'`) or double (`"`)
 #' quotes around the value.
 
 #+ assignment_string
+Greg <- ("Do Not Panic"); Greg;
+Greg <- ('Do Not Panic'); Greg;
+Greg <- ("Don't worry"); Greg;
+Jerry <- ('The "Heart of Gold" comes equipped with heated leather seats and an infinite improbability drive'); Jerry;
+Joseph <-42; Joseph;
 
 #' Logical values are `TRUE` or `FALSE`. Can also be created using `>`, `<`,
 #' `==`, `!=`, `>=`, `<=`
 
 #+ assignment_logical
-
+job <-50; job;
+job == 50;
+job < 50; job;
+job > 50; job;
+job != 50; job;
+job >= 50; job;
+job <= 50; job;
 #' Missing values are represented by `NA` (no quotes for any of these). Null
 #' values are _not_ the same as missing and they are represented by `NULL`. In
 #' some circumstances you might also run into `Inf`, `-Inf`, and `NaN`. These
@@ -91,7 +105,12 @@ whatisthis(bar)
 #' functions or converted from a character string using `as.Date()`.
 
 #+ assignment_datetime
-
+Schedule <- Sys.Date(); Schedule;
+Schedule <- Sys.time(); Schedule;
+schedule <- "08/02/2022"
+whatisthis(schedule)
+schedule <- as.Date(schedule,"%m/%d/%Y")
+whatisthis(schedule)
 #' Factors are basically integers that have labels. They are a human-readable
 #' alternative to using integer codes for discrete data. These will make more
 #' sense after we talk about vectors in the next section.
