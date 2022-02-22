@@ -12,6 +12,11 @@
 #' number_sections: false
 #' keep_md: true
 #' fig_caption: true
+#' output:
+#'   html_document:
+#'     toc: true
+#'     toc_float: true
+#'     code_folding: show
 #' ---
 #'
 #+ init, echo=FALSE, message=FALSE, warning=FALSE
@@ -125,7 +130,9 @@ whatisthis(schedule)
 #' values.
 #'
 #' ### Vectors
-#'
+#'foo <- c(12, 14, 16, 18, 20, 22)
+#'print(foo <- c(12, 14, 16, 18, 20, 22))
+print(foo);
 #' The default data structure in R is a `vector`. You create one with the `c()`
 #' command with any number of arguments. All items in a vector have to be the
 #' same type.
@@ -138,11 +145,15 @@ whatisthis(schedule)
 #' are identical, and both return `1` when used with the `length()` function.
 
 #+ vectors_length1
-
+length(foo);
 #' If you want to create a sequence of consecutive integers, you can use the `:`
 #' operator.
 
 #+ vectors_sequence
+40:70
+36:80
+-20:30
+seq_len(20)
 
 #' In most other languages, you need to use a `for` loop in order to perform
 #' some sort of change to a series of values. In R, you often don't have to
@@ -152,22 +163,31 @@ whatisthis(schedule)
 #' want all of them to be either the same length or length 1.
 
 #+ vectors_operators
+foo+7
+foo>= 12
 
 #' You can assign names to some or all members of a vector when you create it.
 #' You can also assign or re-assign names later using the `names()` function.
 
 #+ vectors_names1
+print(cup <- c(b="job", c="school", d="office"))
+
 
 #' You can also use it to see the currently assigned names.
 
 #+ vectors_names2
-
+names(foo)
+names(cup)
+names(cup);
+names(cup) <- c("spoon", "knife", "fork")
+cup
 #' You can subset a vector by using `[...]` with the `...` replaced by _another_
 #' vector, of integers indicating which positions you want to extract. Or you
 #' could use a vector of names.
 
 #+ vectors_subset1
-
+foo[12]
+foo[3]
 #' If you just need a single value, use a single name or number.
 
 #+ vectors_subset2
@@ -177,17 +197,32 @@ whatisthis(schedule)
 #' expressions separated by commas `,`.
 
 #+ vectors_subset3
+foo[c(12,14,16)]
+foo[12:16]
 
 #' Other useful functions for exploring vectors: `length()`, `summary()`,
 #' `table()`, `head()`, `tail()`, `sum()`, `diff()`, `seq_along()`.
 
 #+ vectors_explore
-
+summary(foo)
+table(foo)
+bird <- sample(1:10, 30, replace = TRUE)* 1000
+table(bird)
+table(bird)
+bird
+head(bird)
+tail(bird)
+diff(bird)
+sum(bird)
+seq_along(bird) #used to generate ID numbers for each element
+sum(bird, na.rm=TRUE)
 #' Here are some aggregation functions. For these, make sure to use `na.rm=T` if
 #' your vector has `NA`s in it... `max()`, `min()`, `mean()`, `median()`,
 #' `quantile()`.
 
 #+ vectors_aggregate
+quantile(bird)
+quantile(bird, na.rm=TRUE)
 
 #' ### Data Frames
 #'
@@ -203,7 +238,58 @@ whatisthis(schedule)
 #' small datasets) `plot()`.
 
 #+ df_explore
+dim (iris)
+nrow (iris)
+ncol(iris)
+names(iris)
+head(iris)
+tail(iris)
+#' how to select rows
+#+ df_rows
+ iris [3:20,]
+iris[c(3:20, 4:36,5:40),]
+nrow(iris)
+seq_len(nrow(iris))
+sample(seq_len(nrow(iris)),20) #without replacement
+sample(seq_len(nrow(iris)),20,replace = TRUE) #with replacement
+iris[sample(seq_len(nrow(iris)),20),]
+
+#' 
+
+#' how to select columns
+#+ df_column 
+ iris[,1:5]
+ iris[,c(2:5, 3:4,2:5)]
+ names(iris)
+ iris[,c("Sepal.Length","Sepal.Width")]
+ foo <- c("Sepal.Length","Sepal.Width")
+ iris[,foo]
+ iris$Sepal.Length
+ iris[["Sepal.Length"]]
+ 
+ foo <- "Sepal.Length"
+ iris[[foo]]
+#' 
+#' how to select columns and rows at the same time
 
 
+#+ df_subset
+ iris[c(3:20, 4:36,5:40),c(2:5, 3:4,2:5)]
 
-
+#' ## comments
+#'
+#' `#` This is an ordinary comment. Everything after it on the same line is not
+#' executed.
+#'
+#' `#'` This indicates that this line should be formatted as text. It must be
+#' the first two characters in that line in order to work.
+#'
+#' `#+` This indicates that the following lines (until the next #' or #+) should
+#' be treated as a "code chunk". I.e. the next lines (but not this one) will be
+#' run, the code will be displayed according to your settings and the results
+#' will be displayed according to your settings.
+#'
+#' For #+ you can add "chunk options" separated by commas. The first one has no
+#' name and is always the label of the chunk. E.g. df_subset. The rest need
+#' names, e.g. error=TRUE.
+#' 
