@@ -286,10 +286,30 @@ iris[sample(seq_len(nrow(iris)),20),]
 #'
 #' `#+` This indicates that the following lines (until the next #' or #+) should
 #' be treated as a "code chunk". I.e. the next lines (but not this one) will be
-#' run, the code will be displayed according to your settings and the results
+#' run, the coede will be displayed according to your settings and the results
 #' will be displayed according to your settings.
 #'
 #' For #+ you can add "chunk options" separated by commas. The first one has no
 #' name and is always the label of the chunk. E.g. df_subset. The rest need
 #' names, e.g. error=TRUE.
-#' 
+#' ## LINWEAR MODEL
+#+ example(lm)
+summary(lm.D9)
+summary(lm.D9)$coeff
+library(broom)
+tidy(lm.D9)
+ glance(lm.D9)
+View(mtcars)
+performance <- lm(mpg~hp+wt+vs+gear+carb+disp, mtcars)
+summary(performance)
+tidy(performance)
+tidy(performance)[-1,c("estimate","p.value")] 
+ lm(mpg~hp+wt+vs+gear+carb+disp, mtcars) %>% tidy() %>% select(c("estimate","p.value"))
+ 
+ lm(mpg~hp+wt+vs+gear+carb+disp, mtcars) %>% tidy() %>% select(c("estimate","p.value"))
+ #+ MULTIPLE COMPARISON
+ performance %>%tidy() %>% select(c("estimate", "p.value")) %>% slice(-1)
+ 
+ performance %>%tidy() %>% select(c("estimate", "p.value")) %>% slice(-1) %>% (unlist)%>% p.adjust()
+ 
+ 
