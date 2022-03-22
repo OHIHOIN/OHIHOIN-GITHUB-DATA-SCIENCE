@@ -311,5 +311,15 @@ tidy(performance)[-1,c("estimate","p.value")]
  performance %>%tidy() %>% select(c("estimate", "p.value")) %>% slice(-1)
  
  performance %>%tidy() %>% select(c("estimate", "p.value")) %>% slice(-1) %>% (unlist)%>% p.adjust()
+ #' ##  dplyr learning
+ #' 
+ list.files('/tmp/sample_data/') %>% sapply()
+ sapply(list.files(''))
+ 
+ #' ##. Working with Datasets and d[lyr
+ #' 
+ #' Define. location of your files
+ #' 
+ r"(C:\Users\Dr Greg\Desktop\DATA  FOR PRACTICE)" %>% gsub("\\\\","/",.)
  
  
