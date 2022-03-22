@@ -294,32 +294,42 @@ iris[sample(seq_len(nrow(iris)),20),]
 #' names, e.g. error=TRUE.
 #' ## LINWEAR MODEL
 #+ example(lm)
+example(lm)
 summary(lm.D9)
 summary(lm.D9)$coeff
 library(broom)
 tidy(lm.D9)
  glance(lm.D9)
-View(mtcars)
+#+ debugg
 performance <- lm(mpg~hp+wt+vs+gear+carb+disp, mtcars)
 summary(performance)
 tidy(performance)
+#+ debugg2
 tidy(performance)[-1,c("estimate","p.value")] 
- lm(mpg~hp+wt+vs+gear+carb+disp, mtcars) %>% tidy() %>% select(c("estimate","p.value"))
- 
- lm(mpg~hp+wt+vs+gear+carb+disp, mtcars) %>% tidy() %>% select(c("estimate","p.value"))
- #+ MULTIPLE COMPARISON
- performance %>%tidy() %>% select(c("estimate", "p.value")) %>% slice(-1)
- 
- performance %>%tidy() %>% select(c("estimate", "p.value")) %>% slice(-1) %>% (unlist)%>% p.adjust()
- #' ##  dplyr learning
- #' 
- list.files('/tmp/sample_data/') %>% sapply()
- sapply(list.files(''))
- 
- #' ##. Working with Datasets and d[lyr
- #' 
- #' Define. location of your files
- #' 
- r"(C:\Users\Dr Greg\Desktop\DATA  FOR PRACTICE)" %>% gsub("\\\\","/",.)
- 
- 
+#+ debugg2a
+lm(mpg~hp+wt+vs+gear+carb+disp, mtcars) %>% tidy() %>% select(c("estimate","p.value"))
+#+ debugg3
+lm(mpg~hp+wt+vs+gear+carb+disp, mtcars) %>% tidy() %>% select(c("estimate","p.value"))
+#+ MULTIPLE COMPARISON
+performance %>%tidy() %>% select(c("estimate", "p.value")) %>% slice(-1)
+
+performance %>%tidy() %>% select(c("estimate", "p.value")) %>% slice(-1) %>% (unlist)%>% p.adjust()
+#' ##  dplyr learning
+#' 
+
+
+#' ##. Working with Datasets and d[lyr
+#' 
+#' Define. location of your files
+#' 
+#+ IMPORT FILES
+r"(C:\Users\Dr Greg\Desktop\DATA  FOR PRACTICE)" %>% gsub("\\\\","/",.)
+list.files(r"(C:\Users\Dr Greg\Desktop\DATA  FOR PRACTICE)") 
+#' ## To List and Import Files
+#' 
+#' 
+
+Example1<- list.files(r"(C:\Users\Dr Greg\Desktop\DATA  FOR PRACTICE)", full.names = T) %>% gsub("\\\\","/",.) %>% sapply(import) %>% setNames(.,basename(names(.)))
+
+Example2 <- Example1$Birthweight.sav
+
