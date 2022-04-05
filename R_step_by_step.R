@@ -340,5 +340,9 @@ birthweight<- import(r"(C:\Users\Dr Greg\Desktop\DATA  FOR PRACTICE\Birthweight.
 mutate(birthweight,AGE=AGE*12)%>%head()
 mutate(birthweight,AGEMonths=AGE*12, AGEDays=AGEMonths*30.4) %>% head
 with(birthweight, case_when(RACE == 1 ~ "Caucasian", RACE == 2 ~ "Asian", RACE == 3 ~ "African American/Black", TRUE ~ as.character(RACE))) %>% table()
-
+mutate(birthweight,AGEMonths=AGE*12, AGEDays=AGEMonths*30.4
+       ,RACELABEL=case_when(RACE == 1 ~ "Caucasian"
+                            , RACE == 2 ~ "Asian"
+                            , RACE == 3 ~ "African American/Black"
+                            , TRUE ~ as.character(RACE))) %>% head
 summary(birthweight$BWT)
