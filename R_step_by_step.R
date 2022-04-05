@@ -333,3 +333,12 @@ Example1<- list.files(r"(C:\Users\Dr Greg\Desktop\DATA  FOR PRACTICE)", full.nam
 
 Example2 <- Example1$Birthweight.sav
 
+#' IMPORTING ONE FILE 
+birthweight<- import(r"(C:\Users\Dr Greg\Desktop\DATA  FOR PRACTICE\Birthweight.sav)")
+#' ## introduction to dplyr
+#'
+mutate(birthweight,AGE=AGE*12)%>%head()
+mutate(birthweight,AGEMonths=AGE*12, AGEDays=AGEMonths*30.4) %>% head
+with(birthweight, case_when(RACE == 1 ~ "Caucasian", RACE == 2 ~ "Asian", RACE == 3 ~ "African American/Black", TRUE ~ as.character(RACE))) %>% table()
+
+summary(birthweight$BWT)
