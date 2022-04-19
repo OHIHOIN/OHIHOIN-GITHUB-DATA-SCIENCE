@@ -368,3 +368,5 @@ group_by(birthweight, SMOKE)%>%
 
 
 group_by(birthweight, SMOKE)%>% summarize(across(where(is.numeric), mean, .names = '{.col}_mean') ,across(where(is.numeric), sd, .names = '{.col}_sd'))
+group_by(birthweight, SMOKE)%>% summarize(across(where(is.numeric), list(Mn=mean,SD=sd)))
+group_by(birthweight, SMOKE)%>% mutate(across(where(is.numeric), list(Mn=mean,SD=sd)))
