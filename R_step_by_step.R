@@ -346,3 +346,25 @@ mutate(birthweight,AGEMonths=AGE*12, AGEDays=AGEMonths*30.4
                             , RACE == 3 ~ "African American/Black"
                             , TRUE ~ as.character(RACE))) %>% head
 summary(birthweight$BWT)
+
+#' # THE SUMMARY FUNCTION
+#'
+summary(birthweight$BWT)
+summary(birthweight)
+
+#' #' summarize
+#' 
+#'
+
+summarize(birthweight, age= median(AGE))
+summarize(birthweight, age= median(AGE), height=median(HT), meanage= mean(AGE))
+group_by(birthweight, SMOKE)
+group_by(birthweight, SMOKE)%>% summarize(age= median(AGE), height=median(HT), meanage= mean(AGE))
+group_by(birthweight, SMOKE)%>% summarize(across(where(is.numeric), sd))
+group_by(birthweight, SMOKE)%>% 
+  summarize(across(where(is.numeric), mean)
+            ,across(where(is.numeric), sd, .names= '{.col}_sd'))
+
+
+
+group_by(birthweight, SMOKE)%>% summarize(across(where(is.numeric), mean, .names = '{.col}_mean') ,across(where(is.numeric), sd, .names = '{.col}_sd'))
